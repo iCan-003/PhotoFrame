@@ -1,0 +1,143 @@
+<!doctype html>
+<head>
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul class=flashes>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>	
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<script src="https://code.jquery.com/jquery-1.8.3.min.js"></script>
+
+
+
+<!--Header&Footer-->
+
+<div>
+    <header>
+        <h2 align="center">PhotoFrame +</h2>
+    </header>
+
+    <footer>
+        <h3 align="center">FullStack Challenge - 2020</h3>
+    </footer>
+</div>
+
+<!--UploadButton-->
+<form method="post" action="/" enctype="multipart/form-data">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <div class="ro">
+  <input id="file1" type="file" name="files[]" multiple="true" accept="image/*" capture style="display:none;"/>
+  <img class="img-responsive" align="left" src="{{ url_for('static', filename="./img/u.svg")}}" alt=""  height="16" width="16" id="upfile1"/>
+  <input type="submit" value="Upload" style="border: none;color: blue;font-weight: bold">
+       
+  </div>
+ 
+<script type="text/javascript">
+$(document).ready(function(e) {
+        $(".showonhover").click(function(){
+			$("#selectfile").trigger('click');
+		});
+    });
+      
+$("#upfile1").click(function () {
+    $("#file1").trigger('click');
+});     
+
+
+</script> 
+
+</form>
+
+<!--css-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+
+.row {
+
+  float: left;
+  flex: 33.33%;
+  padding: 20px;
+  }
+
+.ro {
+  
+  border-width: 4px;	
+  border-bottom: blue;
+  border-style: outset;
+  position: fixed;
+  top: 5%;
+  left: 50%;
+  margin-top: 50px;
+  margin-left: -45px;
+}
+body {
+    margin: 0;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+    height: 60px;
+    background-color: hsl(9, 100%, 64%);
+    font-weight: bold;
+    color: white;
+}
+
+
+footer {
+    width: 100%;
+    position: fixed;
+    z-index: -1;
+    bottom: 0;
+    background-color: hsl(9, 100%, 64%);
+    height: 60px;
+    font-weight: bold;
+    color: white;
+}
+
+</style>
+
+
+<body>
+<div>
+{% if filenames %}
+{% print("Uploaded Img_Files:") %}
+{% print(filenames) %}
+{% endif %}
+</div>
+
+{% if filenames %}
+
+	{% for filename in filenames %}
+	
+	<div class="row">
+			<img class="img-rounded" class="img-rounded" src="{{ url_for('display_image', filename=filename) }}" height="250" width="450" style="left: 70px;top: 150px;position: relative;">
+	
+	</div>
+		
+	{% endfor %}
+
+{% endif %}
+
+
+</body>
+
+</html>
